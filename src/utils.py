@@ -2,10 +2,10 @@ import os
 import pickle
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import r2_score
-from tabulate import tabulate  # we'll use this to print tables nicely; install via pip if needed
-
-from sklearn.model_selection import GridSearchCV
+from tabulate import tabulate  # we'll use this to print tables nicely; install via pip if need
 from tabulate import tabulate
+import pandas as pd
+import numpy as np
 
 def evaluate_models(X_train, y_train, X_test, y_test, models, params):
     report = []  # list of tuples for tabulate
