@@ -1,21 +1,24 @@
 from src.components.data_ingestion import DataIngestion
 from src.components.data_validation import DataValidation
 from src.components.data_transformation import DataTransformation
+from src.components.model_trainer import ModelTrainer
 
-if __name__ == "__main__":
-    # Step 1: Ingest
-    ingestion = DataIngestion()
-    train_data, test_data = ingestion.initiate_data_ingestion()
-    print("Data Ingestion Done")
+# Step 1: Ingest Data
+ingestion = DataIngestion()
+train_path, test_path = ingestion.initiate_data_ingestion()
+print("Data Ingestion Done")
 
-    # Step 2: Validate
-    validator = DataValidation(train_data, test_data)
-    validator.validate()
-    print("Data validation Done")
+# Step 2: Validate Data
+validation = DataValidation(train_data=train_path, test_data=test_path)
+validation.initiate_data_validation()
+print("Data Validation Done")
 
-    # ✅ Step 3: Transform
-    transformer = DataTransformation()
-    train_arr, test_arr, preprocessor_path = transformer.initiate_data_transformation(train_data, test_data)
+# Step 3: Transform Data
+transformer = DataTransformation()
+train_arr, test_arr, _ = transformer.initiate_data_transformation(train_path, test_path)
+print("✅ Data Transformation Done.")
 
-    print("✅ Data Transformation Done.")
-    print("📁 Preprocessor Saved at:", preprocessor_path)
+# Step 4: Train Model
+model_trainer = ModelTrainer()
+best_model_name, best_score, best_model = model_trainer.initiate_model_trainer(train_arr, test_arr)
+print(f"✅ Best Model: {best_model_name} with R2 score: {best_score}")

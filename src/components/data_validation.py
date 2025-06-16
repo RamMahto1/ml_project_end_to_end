@@ -9,11 +9,11 @@ class DataValidation:
         self.train_data = train_data
         self.test_data = test_data
 
-    def validate(self):
+    def initiate_data_validation(self):  # ✅ Renamed from `validate` to `initiate_data_validation`
         try:
             logging.info("✅ Starting Data Validation...")
 
-            # Load data
+            # Load datasets
             train_df = pd.read_csv(self.train_data)
             test_df = pd.read_csv(self.test_data)
 
@@ -29,11 +29,11 @@ class DataValidation:
             logging.info(f"Train Types:\n{train_df.dtypes}")
             logging.info(f"Test Types:\n{test_df.dtypes}")
 
-            # 4. Summary
+            # 4. Summary statistics
             logging.info(f"Train Summary:\n{train_df.describe()}")
             logging.info(f"Test Summary:\n{test_df.describe()}")
 
-            logging.info("✅ Data Validation Completed.")
+            logging.info("✅ Data Validation Completed Successfully.")
 
         except Exception as e:
             raise CustomeException(e, sys)
